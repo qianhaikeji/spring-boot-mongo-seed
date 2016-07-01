@@ -86,3 +86,7 @@ gradle build -x test
 2. [spring mongo](http://docs.spring.io/spring-data/data-mongo/docs/1.8.4.RELEASE/reference/html/): spring集成mongo
 3. [jersey](https://waylau.gitbooks.io/jersey-2-user-guide/content/): spring restful支持库
 4. [spring security](https://vincentmi.gitbooks.io/spring-security-reference-zh/content/): 认证鉴权
+
+
+
+[其它项目资源](https://github.com/qianhaikeji/develop-guide.git)
