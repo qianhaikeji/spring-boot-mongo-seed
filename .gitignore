@@ -1,0 +1,16 @@
+.avoscloud/
+node_modules/
+npm-debug.log
+.avoscloud/
+.DS_Store
+.DS_Store?
+*.swp
+._.DS_Store
+.avoscloud/
+
+.classpath
+.project
+.settings/
+bin/
+.gradle/
+build/
