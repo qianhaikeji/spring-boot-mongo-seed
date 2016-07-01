@@ -15,16 +15,12 @@ import org.springframework.stereotype.Component;
 import com.cx.szsh.models.Test;
 import com.cx.szsh.services.TestService;
 import com.cx.szsh.utils.HttpClientHelper;
-import com.cx.szsh.utils.QidiHelper;
 
 @Component
 @Path("/test")
 public class TestRest extends BaseRest {
     @Autowired
     private TestService testService;
-    
-    @Autowired
-    private QidiHelper qidiHelper;
 
     @GET
     @Path("/json")
@@ -56,15 +52,6 @@ public class TestRest extends BaseRest {
     	Map<Object, Object> apiResponse = new HashMap<Object, Object>();
         Test test = testService.find("1");
         apiResponse.put("message", test.toString());
-        return Response.ok(apiResponse).build();
-    }
-
-    @GET
-    @Path("/qidi/notify")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response qidiNotify() {
-        Map<Object, Object> apiResponse = new HashMap<Object, Object>();
-        apiResponse.put("message", qidiHelper.pushNotifyMessage("a", "a", "zOknJU8vHFyfOlTGcPdb9xCu", "4PLqnAfIC2ng6gh2wcNyzustVrPYO7qt"));
         return Response.ok(apiResponse).build();
     }
     

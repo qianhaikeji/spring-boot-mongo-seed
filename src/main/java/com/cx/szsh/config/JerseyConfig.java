@@ -17,12 +17,7 @@ public class JerseyConfig extends ResourceConfig {
     public JerseyConfig() {
     	register(TestRest.class);
     	register(AdminRest.class);
-        register(LiveVideoRest.class);
         register(UploadRest.class);
-        register(TrafficRest.class);
-        register(MedicalRest.class);
-        register(ConvenienceRest.class);
-        register(TravelRest.class);
         
         //注册 MultiPart，支持文件上传
         register(MultiPartFeature.class);

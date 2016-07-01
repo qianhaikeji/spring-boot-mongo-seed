@@ -27,16 +27,14 @@ import org.springframework.stereotype.Component;
 import com.cx.szsh.auth.Authority.AuthorityName;
 import com.cx.szsh.auth.JwtAuthReq;
 import com.cx.szsh.auth.JwtAuthRsp;
-import com.cx.szsh.auth.QidiAuthReq;
 import com.cx.szsh.exceptions.ServiceException;
 import com.cx.szsh.models.BaseQueryParams;
 import com.cx.szsh.models.User;
 import com.cx.szsh.services.UserService;
 import com.cx.szsh.utils.JwtTokenHelper;
 import com.cx.szsh.utils.PATCH;
-import com.cx.szsh.utils.QidiHelper;
 import com.cx.szsh.utils.RestfulHelper;
-import com.nqsky.meap.api.response.userCenter.UserInfo;
+
 
 @Component
 @Path("/admin")
@@ -44,9 +42,6 @@ public class AdminRest extends BaseRest {
 
 	@Autowired
 	private AuthenticationManager authenticationManager;
-
-	@Autowired
-	private QidiHelper qidiTokenUtil;
 	
 	@Autowired
 	private JwtTokenHelper jwtTokenUtil;
@@ -79,34 +74,6 @@ public class AdminRest extends BaseRest {
 	public Response getUserList(@BeanParam BaseQueryParams bps) {
 		Page<User> list = userService.getUserList(bps);
 		return Response.ok(list).build();
-	}
-	
-	/**
-	 * 检验启迪token，如果有效，则生产自己的token并返回
-	 */
-	@GET
-	@Path("/token/qidi")
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response getQidiToken(@BeanParam QidiAuthReq authRequest) throws URISyntaxException {
-		if (!qidiTokenUtil.validateToken(authRequest.getToken(), authRequest.getAppKey(), authRequest.getAppSecret())){
-			return Response.temporaryRedirect(new java.net.URI(authRequest.getUri())).build();
-		}
-		
-		User user = userService.getSuperUser();
-		
-		try{
-			final String token = jwtTokenUtil.generateToken(user.getUsername());
-			
-			return Response.temporaryRedirect(new java.net.URI(authRequest.getUri()))
-	         .cookie(new NewCookie("token", token, "/", null, 0, null, jwtTokenUtil.getTokenExpiration().intValue(), false))
-	         .cookie(new NewCookie("role", (user.getAuthorities().get(0)!=null)?user.getAuthorities().get(0).getName().toString():"", "/", null, 0, null, jwtTokenUtil.getTokenExpiration().intValue(), false))
-	         .cookie(new NewCookie("meta", user.getMeta(), "/", null, 0, null, jwtTokenUtil.getTokenExpiration().intValue(), false))
-	         .cookie(new NewCookie("username", user.getUsername(), "/", null, 0, null, jwtTokenUtil.getTokenExpiration().intValue(), false))
-	         .build();
-		}catch (AuthenticationException e) {
-			logger.warn(e.toString());
-			return Response.temporaryRedirect(new java.net.URI(authRequest.getUri())).build();
-		}
 	}
 
 	@POST

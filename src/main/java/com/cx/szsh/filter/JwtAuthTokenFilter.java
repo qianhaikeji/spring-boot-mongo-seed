@@ -19,7 +19,6 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 
 import com.cx.szsh.services.UserService;
 import com.cx.szsh.utils.JwtTokenHelper;
-import com.cx.szsh.utils.QidiHelper;
 
 public class JwtAuthTokenFilter extends UsernamePasswordAuthenticationFilter {
 
@@ -28,16 +27,9 @@ public class JwtAuthTokenFilter extends UsernamePasswordAuthenticationFilter {
 
     @Autowired
     private JwtTokenHelper jwtTokenUtil;
-    
-	@Autowired
-	private QidiHelper qidiTokenUtil;
 
     @Value("${jwt.authType}")
     private String authType;
-    
-    @Value("${jwt.qidiAuthType}")
-    private String qidiAuthType;
-
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
@@ -62,16 +54,6 @@ public class JwtAuthTokenFilter extends UsernamePasswordAuthenticationFilter {
             		logger.info(e.getMessage());
             	}
             }
-        }else if (authToken != null && authToken.startsWith(qidiAuthType) && authToken.length() > (qidiAuthType.length()+1)){
-        	authToken = authToken.substring(qidiAuthType.length()+1);
-            if ("qiditoken".equals(authToken) && SecurityContextHolder.getContext().getAuthentication() == null) {
-                UserDetails userDetails = userService.getQidiUser();
-                
-                UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
-                authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(httpRequest));
-                SecurityContextHolder.getContext().setAuthentication(authentication);
-            }
-        	
         }
        
         chain.doFilter(request, response);

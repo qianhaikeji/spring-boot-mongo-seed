@@ -19,7 +19,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import com.cx.szsh.auth.Authority.AuthorityName;
 import com.cx.szsh.auth.CustomerAuthEntryPoint;
 import com.cx.szsh.filter.JwtAuthTokenFilter;
-import com.cx.szsh.filter.QidiAuthTokenFilter;
 import com.cx.szsh.filter.SimpleCORSFilter;
 import com.cx.szsh.services.UserService;
 
@@ -57,13 +56,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter  {
         return authenticationTokenFilter;
     }
     
-//    @Bean
-//    public QidiAuthTokenFilter qidiAuthTokenFilterBean() throws Exception {
-//    	QidiAuthTokenFilter authenticationTokenFilter = new QidiAuthTokenFilter();
-//        authenticationTokenFilter.setAuthenticationManager(authenticationManagerBean());
-//        return authenticationTokenFilter;
-//    }    
-
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
@@ -125,7 +117,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter  {
         
         // 必须把跨域配置放在鉴权过滤器前，否则401响应将无法添加跨域设置，导致跨域问题
         httpSecurity.addFilterBefore(new SimpleCORSFilter(), UsernamePasswordAuthenticationFilter.class);
-        //httpSecurity.addFilterBefore(qidiAuthTokenFilterBean(), UsernamePasswordAuthenticationFilter.class);
         httpSecurity.addFilterBefore(jwtAuthTokenFilterBean(), UsernamePasswordAuthenticationFilter.class);
         
         // disable page caching
