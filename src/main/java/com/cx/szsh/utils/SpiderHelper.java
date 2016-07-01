@@ -1,49 +1,18 @@
 package com.cx.szsh.utils;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.Map;
 
-import org.jsoup.Connection;
 import org.jsoup.Connection.Method;
 import org.jsoup.Connection.Response;
-import org.jsoup.HttpStatusException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.parser.Parser;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
 public class SpiderHelper extends BaseHelper {
 	private static final int GET_TIMEOUT = 60 * 1000; //单位 ms
-	
-	@Value("${spider.traffic.illegal.url}")
-	private String trafficIllegalUrl;
-	@Value("${spider.traffic.illegal.openId}")
-	private String trafficIllegalOpenId;
-	@Value("${spider.traffic.illegal.publicId}")
-	private String trafficIllegalPublicId;
-	
-	@Value("${spider.insurance.url}")
-	private String insuranceUrl;
-	@Value("${spider.insurance.areano}")
-	private String insuranceAreano;
-	
-	public Map<String, String> getTrafficIllegalBaseParams () {
-		Map<String, String> mapper = new HashMap<String, String>();
-		mapper.put("url", trafficIllegalUrl);
-		mapper.put("OpenId", trafficIllegalOpenId);
-		mapper.put("PublicId", trafficIllegalPublicId);
-		return mapper;
-	}
-	
-	public Map<String, String> getInsuranceBaseParams () {
-		Map<String, String> mapper = new HashMap<String, String>();
-		mapper.put("url", insuranceUrl);
-		mapper.put("areano", insuranceAreano);
-		return mapper;
-	}
 	
     public Document getHtmlDocument(String url, Map<String, Object> params) throws IOException {
         url = genGetMethodUrl(url, params);

@@ -3,7 +3,6 @@ package com.cx.szsh.utils;
 import java.io.IOException;  
 import java.io.UnsupportedEncodingException;  
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -18,12 +17,7 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.CloseableHttpClient;  
 import org.apache.http.impl.client.HttpClients;  
 import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import javax.ws.rs.core.MediaType;

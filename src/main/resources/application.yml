@@ -1,7 +1,6 @@
 server:
   port: 8080
   contextPath:
-  machineId: 1
   upload:
     dir: /data/log/upload/
 
@@ -22,30 +21,15 @@ spring:
     expiration: 604800    
 
 logging:
-  path: /tmp/log/cxszsh
+  path: /tmp/log/sbs
 
 jwt:
   secret: mySecret
   expiration: 604800
   authType: Bearer
-  qidiAuthType: Qidi
-
-qidi:
-  auth:
-    url: http://183.224.41.198:8088/nqsky-meap-front/open.jws
 
 qiniu:
-  accessKey: IZV4vlVHlVOS6lpaOD0XPL4ez5s69tforscCA_GO
-  secretKey: rKN1i8N4ilLVxvZGpxLCt7JhDMA-P7W27x3xUAkW
-  bucketName: cxszsh
-  bucketHost: http://o86g88ag4.bkt.clouddn.com
-
-spider:
-  traffic:
-    illegal:
-      url: http://116.55.248.41/yntpgov/Home/CarIllegalList
-      openId: oIg0Ej-0OTj6_XrouPaiw1clhxzE
-      publicId: gh_11fa59771cc7
-  insurance:
-    url: http://wx.ynhrss.gov.cn:12337/HrssWechat/HrssWechatAction.do
-    areano: 5323
+  accessKey: 
+  secretKey: 
+  bucketName: 
+  bucketHost: 
