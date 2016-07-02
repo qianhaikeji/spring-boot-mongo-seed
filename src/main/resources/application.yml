@@ -11,9 +11,9 @@ spring:
   mongodb:
     host: 127.0.0.1
     port: 27017
-    database: cxszsh
-    username: cxadmin
-    password: cxszsh
+    database: sbseed
+    username: sbseed
+    password: sbseed
 
   redis:
     host: 127.0.0.1
