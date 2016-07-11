@@ -92,7 +92,7 @@ public class UploadRest extends BaseRest {
 		outpuStream.flush();
 		outpuStream.close();
 		
-		return Paths.get("/upload", "image", sdf.format(new Date()), fileName).toString();
+		return String.format("/upload/image/%s/%s", sdf.format(new Date()), fileName);
 	}
 
 	private String uploadFileQiNiu(String fileName, InputStream inputStream) throws IOException {
