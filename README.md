@@ -41,7 +41,7 @@ db.createUser({user:"dba",pwd:"dba",roles: [ { role: "userAdminAnyDatabase", db:
 
 ```
 use sbseed   #创建数据库
-db.createUser({user: "admin", pwd: "sbseed", roles: [{ role: "readWrite", db: "sbseed" }]})
+db.createUser({user: "sbseed", pwd: "sbseed", roles: [{ role: "readWrite", db: "sbseed" }]})
 ```
 
 注意：用户必须在当前数据库下授权，即“数据库帐号是跟着数据库来走的，哪里创建哪里认证。”
