@@ -15,6 +15,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import com.qhkj.seed.auth.CustomAuthenticationProvider;
 import com.qhkj.seed.auth.CustomerAuthEntryPoint;
 import com.qhkj.seed.filter.JwtAuthTokenFilter;
 import com.qhkj.seed.filter.SimpleCORSFilter;
@@ -30,10 +31,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter  {
 
     @Autowired
     private UserService userService;
-
+    
+    @Autowired
+    private CustomAuthenticationProvider customAuthenticationProvider;
+    
     @Autowired
     public void configureAuthentication(AuthenticationManagerBuilder builder) throws Exception {
-    	builder.userDetailsService(userService).passwordEncoder(passwordEncoder());
+      //设置userDetailsService会开启默认的daoAuthenticationProvider，这里使用我们自己的验证provider
+        //builder.userDetailsService(userService).passwordEncoder(passwordEncoder());
+        
+        builder.authenticationProvider(customAuthenticationProvider);
     }
 
     @Bean
